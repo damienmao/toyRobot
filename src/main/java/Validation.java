@@ -25,7 +25,6 @@ public class Validation {
         map1.put(Direction.NORTH, 0);
         map1.put(Direction.SOUTH, 0);
 
-        System.out.println(map1);
         if (robot.getX().equals(5) && robot.getDirection().equals(Direction.EAST)) {
             map1.put(Direction.EAST, 1);
         }
