@@ -2,6 +2,7 @@ import Constants.Direction;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class Runner {
@@ -15,12 +16,12 @@ public class Runner {
 
         Boolean firstValidCommand = false;
         while (firstValidCommand.equals(false)) {
-            Command command = new Command();
-            firstValidCommand = validation.validateFirstCommand(command.getCommand());
+            String command = new Scanner(System.in).nextLine();
+            firstValidCommand = validation.validateFirstCommand(command);
             if (firstValidCommand) {
-                String x = command.getCommand().split(" ")[1];
-                String y = command.getCommand().split(" ")[2];
-                String direction = command.getCommand().split(" ")[3];
+                String x = command.split(" ")[1];
+                String y = command.split(" ")[2];
+                String direction = command.split(" ")[3];
                 robot.setX(Integer.parseInt(x));
                 robot.setY(Integer.parseInt(y));
                 robot.setDirection(Direction.valueOf(direction));
@@ -30,8 +31,8 @@ public class Runner {
 
 
         while (firstValidCommand.equals(true)) {
-            Command command1 = new Command();
-            if (command1.getCommand().equals("MOVE")) {
+           String command1 = new Scanner(System.in).nextLine();
+            if (command1.equals("MOVE")) {
                 boolean outofBound = validation.validateIfOutOfBound(robot);
                 if (outofBound == false) {
                     Robot robot1 = actions.move(robot);
@@ -40,13 +41,13 @@ public class Runner {
                     System.out.println("PLease use 'LEFT' to turn left or 'RIGHT' to turn right");
                 }
             }
-            else if (command1.getCommand().equals("LEFT")) {
+            else if (command1.equals("LEFT")) {
                 actions.left(robot);
                 System.out.println("Robot is placed at " + robot.getX() + " " + robot.getY() + " facing " + robot.getDirection());
-            } else if (command1.getCommand().equals("RIGHT")) {
+            } else if (command1.equals("RIGHT")) {
                 actions.right(robot);
                 System.out.println("Robot is placed at " + robot.getX() + " " + robot.getY() + " facing " + robot.getDirection());
-            } else if (command1.getCommand().equals("REPORT")) {
+            } else if (command1.equals("REPORT")) {
                 actions.report(robot);
             } else {
                 System.out.printf("Please input correct command for this robot\n");
