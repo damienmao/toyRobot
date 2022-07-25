@@ -40,6 +40,6 @@ public class Actions {
     }
 
     public void report(Robot robot) {
-        System.out.println("Robot is facing " + robot.getDirection() + "at " + robot.getX() + "and " + robot.getY());
+        System.out.println("Robot is facing " + robot.getDirection() + " at " + robot.getX() + "and " + robot.getY());
     }
 }
