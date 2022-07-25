@@ -7,13 +7,16 @@ import java.util.Map;
 
 import static Constants.Direction.*;
 
-@Data
-@NoArgsConstructor
+//@Data
+//@NoArgsConstructor
 public class Robot {
 
     private Integer x;
     private Integer y;
     private Direction direction;
+
+    public Robot() {
+    }
 
     public Integer getX() {
         return x;

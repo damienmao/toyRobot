@@ -3,10 +3,14 @@ import java.util.Scanner;
 
 public class Command {
     Scanner scanner = new Scanner(System.in);
-    public String command = scanner.next();
+    public String command = scanner.nextLine();
 
-
-
+//    public Command() {
+//    }
+//
+//    public Command( String command) {
+//        this.command = command;
+//    }
 
     public String getCommand() {
         return command;
