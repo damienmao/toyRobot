@@ -56,10 +56,7 @@ public class ValidationTest {
         robot.setDirection(Direction.SOUTH);
         Assertions.assertEquals(validation.validateIfOutOfBound(robot),false);
     }
-  @Test
-  public  void testGetMap(){
-        Map<Direction,Integer> map = validation.getMap();
-  }
+
     @Test
     public void testvalidateFirstCommand(){
         String command = "PLACE 3 3 SOUTH";

@@ -8,15 +8,6 @@ import java.util.regex.Pattern;
 
 public class Validation {
 
-    private  Map<Direction, Integer> map = Map.ofEntries(Map.entry(Direction.EAST, 0),
-            Map.entry(Direction.WEST, 0),
-            Map.entry(Direction.NORTH, 0),
-            Map.entry(Direction.SOUTH, 0));
-
-    public  Map<Direction, Integer> getMap() {
-        return map;
-    }
-
     public boolean validateIfOutOfBound(Robot robot) {
 
         Map<Direction,Integer> map1 =new HashMap<>();
@@ -44,7 +35,7 @@ public class Validation {
         return false;
     }
 
-    public boolean validateFirstCommand(String command) {
+    public Boolean validateFirstCommand(String command) {
      Pattern pattern = Pattern.compile("^PLACE [0-5] [0-5] (SOUTH|EAST|WEST|NORTH)");
         Matcher m = pattern.matcher(command);
        // String regex = "^PLACE [0-5] [0-5] (SOUTH|EAST|WEST|NORTH)";
@@ -57,8 +48,6 @@ public class Validation {
 
         return false;
     }
-
-// public v
 
 
 }
