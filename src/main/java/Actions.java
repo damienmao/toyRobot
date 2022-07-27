@@ -19,24 +19,29 @@ public class Actions {
 
 
     public Robot move(Robot robot) {
-        if(robot.getDirection().equals(EAST)){
+        if (robot.getDirection().equals(EAST)) {
             robot.setX(robot.getX() + 1);
+        } else if (robot.getDirection().equals(WEST)) {
+            robot.setX(robot.getX() - 1);
+        } else if (robot.getDirection().equals(NORTH)) {
+            robot.setY(robot.getY() + 1);
+        } else if (robot.getDirection().equals(SOUTH)) {
+            robot.setY(robot.getY() - 1);
         }
-        else if (robot.getDirection().equals(WEST)){ robot.setX(robot.getX() - 1);}
-        else if (robot.getDirection().equals(NORTH)){robot.setY(robot.getY() + 1);}
-        else if (robot.getDirection().equals(SOUTH)){robot.setY(robot.getY() - 1);}
+        System.out.println("Robot is placed at " + robot.getX() + " " + robot.getY() + " facing " + robot.getDirection());
+
         return robot;
     }
 
 
     public void left(Robot robot) {
         robot.setDirection(left.get(robot.getDirection()));
-        System.out.println("Robot has turned left");
+        System.out.println("Robot is placed at " + robot.getX() + " " + robot.getY() + " facing " + robot.getDirection());
     }
 
     public void right(Robot robot) {
         robot.setDirection(right.get(robot.getDirection()));
-        System.out.println("Robot has turned right");
+        System.out.println("Robot is placed at " + robot.getX() + " " + robot.getY() + " facing " + robot.getDirection());
     }
 
     public void report(Robot robot) {
