@@ -1,22 +1,15 @@
-import Constants.Direction;
-
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.stream.Collectors;
-
 public class Runner {
 
     public static void main(String[] args) {
 
-        Validation validation = new Validation();
-        Actions actions = new Actions();
-        Robot robot = new Robot();
-        Manager manager = new Manager(validation, actions, robot);
+        RobotValidation robotValidation = new RobotValidation();
+        RobotActions robotActions = new RobotActions();
+        RobotModel robotModel = new RobotModel();
+        RobotManager robotManager = new RobotManager(robotValidation, robotActions, robotModel);
         System.out.println("Toy Robot started...taking first command");
-        manager.firstValidation();
-        while (manager.getFirstValidCommand()) {
-            manager.secondValidation();
+        robotManager.firstValidation();
+        while (robotManager.getFirstValidCommand()) {
+            robotManager.secondValidation();
         }
     }
 }

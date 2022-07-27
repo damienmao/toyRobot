@@ -1,21 +1,13 @@
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import Constants.Direction;
 
-import java.util.HashMap;
-import java.util.Map;
 
-import static Constants.Direction.*;
-
-//@Data
-//@NoArgsConstructor
-public class Robot {
+public class RobotModel {
 
     private Integer x;
     private Integer y;
     private Direction direction;
 
-    public Robot() {
+    public RobotModel() {
     }
 
     public Integer getX() {

@@ -1,16 +1,14 @@
-import Constants.Direction;
-
 import java.util.Scanner;
 
-public class Manager {
-    private final Validation validation;
-    private final Actions actions;
-    private final Robot robot;
+public class RobotManager {
+    private final RobotValidation robotValidation;
+    private final RobotActions robotActions;
+    private final RobotModel robotModel;
 
-    public Manager(Validation validation, Actions actions, Robot robot) {
-        this.validation = validation;
-        this.actions = actions;
-        this.robot = robot;
+    public RobotManager(RobotValidation robotValidation, RobotActions robotActions, RobotModel robotModel) {
+        this.robotValidation = robotValidation;
+        this.robotActions = robotActions;
+        this.robotModel = robotModel;
     }
 
     Boolean firstValidCommand = false;
@@ -23,15 +21,13 @@ public class Manager {
         this.firstValidCommand = firstValidCommand;
     }
 
-
-
     public void firstValidation() {
         Boolean validationFirst = false;
         while (validationFirst.equals(false)) {
             String command = new Scanner(System.in).nextLine();
-            firstValidCommand = validation.validateFirstCommand(command);
+            firstValidCommand = robotValidation.validateFirstCommand(command);
             if (firstValidCommand) {
-                actions.placeRobot(command, robot);
+                robotActions.placeRobot(command, robotModel);
                 setFirstValidCommand(true);
                 validationFirst = true;
             }
@@ -42,21 +38,21 @@ public class Manager {
         Scanner scanner = new Scanner(System.in);
         String command1 = scanner.nextLine();
         if (command1.equals("MOVE")) {
-            boolean outofBound = validation.validateIfOutOfBound(robot);
+            boolean outofBound = robotValidation.validateIfOutOfBound(robotModel);
             if (outofBound == false) {
-                actions.move(robot);
+                robotActions.move(robotModel);
             } else {
                 System.out.println("Please use 'LEFT' to turn left or 'RIGHT' to turn right");
             }
         } else if (command1.equals("LEFT")) {
-            actions.left(robot);
+            robotActions.left(robotModel);
         } else if (command1.equals("RIGHT")) {
-            actions.right(robot);
+            robotActions.right(robotModel);
         } else if (command1.equals("REPORT")) {
-            actions.report(robot);
+            robotActions.report(robotModel);
         } else if (command1.toUpperCase().contains("PLACE")) {
-            Boolean valid = validation.validateFirstCommand(command1);
-            if (valid) actions.placeRobot(command1, robot);
+            Boolean valid = robotValidation.validateFirstCommand(command1);
+            if (valid) robotActions.placeRobot(command1, robotModel);
         } else {
             System.out.printf("Please input correct command for this robot: \n");
         }

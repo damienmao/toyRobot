@@ -1,31 +1,18 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.NoSuchElementException;
-import java.util.Scanner;
-
-import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 public class RunnerTest {
-    @InjectMocks
+
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private Runner runner;
-    @Mock
-    private Manager manager;
-    @Mock
-    private Actions actions;
-    @Mock
-    private Validation validation;
-    @Mock
-    private Robot robot;
 
     @BeforeEach
     void setup() {

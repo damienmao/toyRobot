@@ -11,25 +11,24 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class ManagerTest {
+public class RobotManagerTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private Manager manager;
+    private RobotManager robotManager;
     @Mock
-    private Actions actions;
+    private RobotActions robotActions;
     @Mock
-    private Validation validation;
+    private RobotValidation robotValidation;
     @Mock
-    private Robot robot;
+    private RobotModel robotModel;
 
     @BeforeEach
     void setup() {
-        manager = new Manager(validation, actions, robot);
+        robotManager = new RobotManager(robotValidation, robotActions, robotModel);
         System.setOut(new PrintStream(outContent));
     }
 
@@ -49,9 +48,9 @@ public class ManagerTest {
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
         //String command = new Scanner(System.in).nextLine(); //dont assign this to a string, this will consume the system inputstream
-        when(validation.validateFirstCommand(anyString())).thenReturn(true);
-        manager.firstValidation();
-        Assertions.assertEquals(manager.getFirstValidCommand(), true);
+        when(robotValidation.validateFirstCommand(anyString())).thenReturn(true);
+        robotManager.firstValidation();
+        Assertions.assertEquals(robotManager.getFirstValidCommand(), true);
     }
 
     @Test
@@ -59,15 +58,15 @@ public class ManagerTest {
         String input = "MOVE";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
-        manager.secondValidation();
-        verify(validation).validateIfOutOfBound(robot);
-        verify(actions).move(robot);
+        robotManager.secondValidation();
+        verify(robotValidation).validateIfOutOfBound(robotModel);
+        verify(robotActions).move(robotModel);
 
         String input1 = "MOVE";
         InputStream in1 = new ByteArrayInputStream(input1.getBytes());
         System.setIn(in1);
-        when(validation.validateIfOutOfBound(robot)).thenReturn(true);
-        manager.secondValidation();
+        when(robotValidation.validateIfOutOfBound(robotModel)).thenReturn(true);
+        robotManager.secondValidation();
         Assertions.assertEquals("Please use 'LEFT' to turn left or 'RIGHT' to turn right", outContent.toString().trim());
     }
 
@@ -76,8 +75,8 @@ public class ManagerTest {
         String input = "LEFT";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
-        manager.secondValidation();
-        verify(actions).left(robot);
+        robotManager.secondValidation();
+        verify(robotActions).left(robotModel);
     }
 
     @Test
@@ -85,8 +84,8 @@ public class ManagerTest {
         String input = "RIGHT";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
-        manager.secondValidation();
-        verify(actions).right(robot);
+        robotManager.secondValidation();
+        verify(robotActions).right(robotModel);
     }
 
     @Test
@@ -94,24 +93,26 @@ public class ManagerTest {
         String input = "REPORT";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
-        manager.secondValidation();
-        verify(actions).report(robot);
+        robotManager.secondValidation();
+        verify(robotActions).report(robotModel);
     }
+
     @Test
     public void testActionReplaceRobot() {
         String input = "PLACE 3 3 SOUTH";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
-        when(validation.validateFirstCommand(input)).thenReturn(true);
-        manager.secondValidation();
-        verify(actions).placeRobot(input,robot);
+        when(robotValidation.validateFirstCommand(input)).thenReturn(true);
+        robotManager.secondValidation();
+        verify(robotActions).placeRobot(input, robotModel);
     }
+
     @Test
     public void testActionInvalid() {
         String input = "d";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
-        manager.secondValidation();
+        robotManager.secondValidation();
         Assertions.assertEquals("Please input correct command for this robot:", outContent.toString().trim());
 
     }
