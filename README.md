@@ -1,3 +1,6 @@
+To build the application locally, simply run "mvn clean build"
+To run unit tests, simply run "mvn test"
+
 The application is a simulation of a toy robotModel moving on a square tabletop, of dimensions 5 units x 5 units.
 
 There are no other obstructions on the table surface.
