@@ -17,7 +17,15 @@ public class Actions {
             Map.entry(NORTH, EAST),
             Map.entry(EAST, SOUTH));
 
-
+    public void placeRobot(String command, Robot robot) {
+        String x = command.split(" ")[1];
+        String y = command.split(" ")[2];
+        String direction = command.split(" ")[3];
+        robot.setX(Integer.parseInt(x));
+        robot.setY(Integer.parseInt(y));
+        robot.setDirection(Direction.valueOf(direction));
+        System.out.println("Robot is placed at " + x + " " + y + " facing " + direction);
+    }
     public Robot move(Robot robot) {
         if (robot.getDirection().equals(EAST)) {
             robot.setX(robot.getX() + 1);

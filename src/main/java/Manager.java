@@ -23,19 +23,15 @@ public class Manager {
         this.firstValidCommand = firstValidCommand;
     }
 
+
+
     public void firstValidation() {
         Boolean validationFirst = false;
         while (validationFirst.equals(false)) {
             String command = new Scanner(System.in).nextLine();
             firstValidCommand = validation.validateFirstCommand(command);
             if (firstValidCommand) {
-                String x = command.split(" ")[1];
-                String y = command.split(" ")[2];
-                String direction = command.split(" ")[3];
-                robot.setX(Integer.parseInt(x));
-                robot.setY(Integer.parseInt(y));
-                robot.setDirection(Direction.valueOf(direction));
-                System.out.println("Robot is placed at " + x + " " + y + " facing " + direction);
+                actions.placeRobot(command, robot);
                 setFirstValidCommand(true);
                 validationFirst = true;
             }
@@ -58,6 +54,9 @@ public class Manager {
             actions.right(robot);
         } else if (command1.equals("REPORT")) {
             actions.report(robot);
+        } else if (command1.toUpperCase().contains("PLACE")) {
+            Boolean valid = validation.validateFirstCommand(command1);
+            if (valid) actions.placeRobot(command1, robot);
         } else {
             System.out.printf("Please input correct command for this robot: \n");
         }

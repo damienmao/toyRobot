@@ -50,10 +50,10 @@ public class Validation {
        // String regex = "^PLACE [0-5] [0-5] (SOUTH|EAST|WEST|NORTH)";
         System.out.println("Validating First Command");
         if (m.find()) {
-            System.out.println("Validation Complete...First Command is valid");
+            System.out.println("Validation Complete...Place Command is valid");
             return true;
         }
-        System.out.printf("Validation Complete...First Command is not valid\n");
+        System.out.printf("Validation Complete...Place Command is not valid\n");
 
         return false;
     }

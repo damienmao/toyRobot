@@ -98,6 +98,15 @@ public class ManagerTest {
         verify(actions).report(robot);
     }
     @Test
+    public void testActionReplaceRobot() {
+        String input = "PLACE 3 3 SOUTH";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        when(validation.validateFirstCommand(input)).thenReturn(true);
+        manager.secondValidation();
+        verify(actions).placeRobot(input,robot);
+    }
+    @Test
     public void testActionInvalid() {
         String input = "d";
         InputStream in = new ByteArrayInputStream(input.getBytes());
